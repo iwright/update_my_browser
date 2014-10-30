@@ -9,5 +9,5 @@
  * Implements hook_page_alter().
  */
 function update_my_browser_page_alter(&$page) {
-  drupal_add_js(drupal_get_path('module', 'update_my_browser') .'/js/updatemybrowser.js');
+  drupal_add_js(drupal_get_path('module', 'update_my_browser') . '/js/updatemybrowser.js');
 }
