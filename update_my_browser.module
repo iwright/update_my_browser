@@ -1,8 +1,7 @@
 <?php
 /**
- * hook_page_alter(&$page)
+ * Implements hook_page_alter(&$page).
  */
-
 function update_my_browser_page_alter(&$page) {
   drupal_add_js(drupal_get_path('module', 'update_my_browser') .'/js/updatemybrowser.js');
 }
