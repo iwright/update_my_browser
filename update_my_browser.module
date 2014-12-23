@@ -9,5 +9,52 @@
  * Implements hook_page_alter().
  */
 function update_my_browser_page_alter(&$page) {
+  $umb_settings = array(
+    'selection' => variable_get('umb_browser_option_selection', 'recommended'),
+    'advance' => variable_get('umb_advance_settings', array(
+      'umb_immediately_display',
+      'umb_non_critical'
+    )),
+  );
+
   drupal_add_js(drupal_get_path('module', 'update_my_browser') . '/js/updatemybrowser.js');
+  drupal_add_js($umb_settings, array('type' => 'setting'));
+
+  //drupal_add_js(drupal_get_path('module', 'update_my_browser') . '/js/updatemybrowser.js');
+}
+
+/**
+ * Implements hook_menu().
+ *
+ * Create the menu item for the config page.
+ *
+ * @return Array of menu items to be added to the menu structure.
+ */
+function update_my_browser_menu() {
+  $items = array();
+  $items['admin/config/services/updatemybrowser'] = array(
+    'title' => t('Update My Browser Settings'),
+    'description' => t('Configure Update My Browser to your specific needs.'),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer Update My Browser'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('update_my_browser_form'),
+    'file' => 'includes/update_my_browser.admin.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ *
+ * @return Array of permissions to manage the updatemybrowser config page.
+ */
+function update_my_browser_permission() {
+  return array(
+    'administer Update My Browser' => array(
+      'title' => t('Administer Update My Browser'),
+      'description' => t('Manage the settings for Update My Browser.'),
+    ),
+  );
 }

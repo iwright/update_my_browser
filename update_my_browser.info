@@ -2,3 +2,6 @@ name = Update My Browser
 description = updatemybrowser is an initiative to spread modern browsers among all internet users http://updatemybrowser.org
 package = Other
 core = 7.x
+
+; Configuration Page
+configure = admin/config/services/updatemybrowser
